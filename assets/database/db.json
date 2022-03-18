@@ -1,0 +1,28 @@
+{
+  "usuarios": [
+    {
+      "tipo": "recrutador",
+      "nome": "Rafae",
+      "dataNascimento": "28/01/2002",
+      "email": "rafael@dbccompany.com",
+      "senha": "123Aa!@dasd",
+      "id": 1
+    },
+    {
+      "tipo": "colaborador",
+      "nome": "Savio",
+      "dataNascimento": "02/02/2000",
+      "email": "rafael@dbccompanyy.com",
+      "senha": "56789",
+      "id": 2
+    },
+    {
+      "tipo": "colaborador",
+      "nome": "Rafae",
+      "dataNascimento": "28/01/2002",
+      "email": "rafael@ompany.com",
+      "senha": "123Aa!@dasd",
+      "id": 3
+    }
+  ]
+}
