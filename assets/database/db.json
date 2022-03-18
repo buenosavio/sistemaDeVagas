@@ -23,6 +23,46 @@
       "email": "rafael@ompany.com",
       "senha": "123Aa!@dasd",
       "id": 3
+    },
+    {
+      "tipo": "colaborador",
+      "nome": "a",
+      "dataNascimento": "28/01/2002",
+      "email": "a",
+      "senha": "a",
+      "id": 4
+    }
+  ],
+  "vagas": [
+    {
+      "titulo": "Vaga 1",
+      "remuneracao": "R$5000",
+      "descricao": "Dev Jr",
+      "id": 1
+    },
+    {
+      "titulo": "Vaga 2",
+      "remuneracao": "R$4000",
+      "descricao": "Dev PL",
+      "id": 2
+    },
+    {
+      "titulo": "",
+      "remuneracao": "R$3232",
+      "descricao": "",
+      "id": 3
+    },
+    {
+      "titulo": "Aaaaa",
+      "remuneracao": "R$3000",
+      "descricao": "aaaa",
+      "id": 4
+    },
+    {
+      "titulo": "Qweqweqwe",
+      "remuneracao": "R$5000",
+      "descricao": "asdasdads",
+      "id": 5
     }
   ]
 }

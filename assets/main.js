@@ -3,7 +3,7 @@ const URL = 'http://localhost:3000';
 let ERRO_VAZIO = document.getElementById('erro-vazio');
 
 
-/* Validações do cadastro */
+//#region validacoes/* Validações do cadastro */ //
 
 const validarNome = (event) => {
 
@@ -129,6 +129,7 @@ const adicionarMascaraData = (input, data) => {
 }
 
 
+//#endregion validacoes
 
 const validarCadastro = (event) => {
   event.preventDefault();
@@ -148,8 +149,8 @@ const validarCadastro = (event) => {
 }
 
 const validarLogin = () => {
-  const emailDigitado = document.getElementById('email-input-login').value;
-  const senhaDigitada = document.getElementById('password-input-login').value;
+  const emailDigitado = 'rafael@ompany.com'//document.getElementById('email-input-login').value;
+  const senhaDigitada = '123Aa!@dasd'//document.getElementById('password-input-login').value;
 
   
   axios.get(`${URL}/usuarios?=email${emailDigitado}`)
@@ -175,21 +176,11 @@ const validarLogin = () => {
 
 }
 
-validarNull = (titulo,descricao) => {
-  let ehValido = !titulo && !descricao;
-  
-  
-  ERRO_VAZIO.setAttribute('class', ehValido ? 'text-danger' : 'd-none');
-  console.log(ehValido);
-  return ehValido;
-  
-}
-
-
 validarRemuneracao = () => {
   const inputNumero = document.getElementById('payment-input-registration');
-  const { value: descricao } = inputNumero
+  let { value: descricao } = inputNumero
   let ehValido;
+  descricao = descricao.replaceAll('R$','')
   let numeros = [...descricao];
   if(descricao) {
     let possuiNumero = numeros.every( char => char.toLowerCase() === char.toUpperCase() && !isNaN(parseInt(char)));
@@ -199,57 +190,48 @@ validarRemuneracao = () => {
   } else {
     ERRO_VAZIO.setAttribute('class', ehValido ? 'text-danger' : 'd-none');
   }
-  
-  
   console.log(ehValido);
   return ehValido;
 
 }
 
-const adicionarMascaraRemuneratoria = () => {
-  let inputNumero = document.getElementById('payment-input-registration').value;
+adicionarMascaraRemuneratoria = () => {
+  let input = document.getElementById('payment-input-registration')
+  let valor = document.getElementById('payment-input-registration').value
   
-  let numeros = [...inputNumero]
-  let prefix = "R$"
-
-  if(numeros.length > 1) {
-    inputNumero = `${prefix} ${inputNumero}`
-  }
-
-  // inputNumero = inputNumero.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'});
-
-  /*let date = document.getElementById("data-input").value;
-  date = date.replaceAll("/", "");
-  let day = date.substring( 0, 2);
-  let month = date.substring( 2, 4);
-  let year = date.substring(4);
-
-  let dateNumbers = [...date];
-
-  if(dateNumbers.length === 2){
-    document.getElementById("data-input").value = `${day}/`
-  } else if(dateNumbers.length === 5){
-    document.getElementById("data-input").value = `${day}/${month}/${year}`
-  } */
-
-
-  //var atual = 600000.00;  //com R$ var f = atual.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'});
-
+    let listaCaracteres = [...valor];
+    
+    let listaFiltrada = listaCaracteres.filter(c => !isNaN(parseInt(c)));
+    if(listaFiltrada && listaFiltrada.length) {
+        let dataDigitada = listaFiltrada.join('');
   
-  // console.log(inputNumero);
-  // return inputNumero;
+        const { length } = dataDigitada;
+        console.log(dataDigitada)
+  
+        switch(length) { 
+            default:
+              input.value = `R$${dataDigitada}`; 
+            break;
+        }
+    }
 
 }
-
 
 validarCadastroDeVagas = (event) => {
   event.preventDefault()
   const inputTitulo = document.getElementById('titulo-input').value;
   const inputDescription = document.getElementById('description-input-registration').value;
 
-  let cadastroValido = !validarNull(inputTitulo, inputDescription) && validarRemuneracao();
-  console.log(cadastroValido);
-  console.log(`Cadastro ${cadastroValido ? 'válido!' : 'inválido'}`);
+  let cadastroValido = inputTitulo && inputDescription && validarRemuneracao();
+
+  if(cadastroValido) {
+    cadastrarVaga(event);
+    document.getElementById('titulo-input').value = '';
+    document.getElementById('description-input-registration').value = '';
+    document.getElementById('payment-input-registration').value = '';
+  } else {
+    ERRO_VAZIO.setAttribute('class', cadastroValido ? 'd-none' : 'text-danger');
+  } 
 
   return cadastroValido;
 }
@@ -354,6 +336,32 @@ const cadastrarUsuario =  (event) => {
   })
   .catch(error => {
     console.log("Erro ao cadastrar usuário!!", error);
+  })
+
+}
+
+const cadastrarVaga =  (event) => {
+  event.preventDefault();
+
+  const inputTitulo = document.getElementById('titulo-input');
+  const { value: titulo } = inputTitulo;
+  
+  const inputDescricao = document.getElementById('description-input-registration');
+  const { value: descricao } = inputDescricao;
+  
+  const inputRemuneracao = document.getElementById('payment-input-registration');
+  const { value: remuneracao } = inputRemuneracao;
+
+  const tituloCapital = titulo.split(' ').map( titulo => titulo.charAt(0).toUpperCase() + titulo.slice(1).toLowerCase() ).join(' ');
+
+  const vaga = new Vaga(tituloCapital, descricao, remuneracao)
+
+  axios.post(`${URL}/vagas`, vaga)
+  .then(success => {
+    console.log('Vaga Incluída', success);
+  })
+  .catch(error => {
+    console.log("Erro ao cadastrar Vaga!!", error);
   })
 
 }
