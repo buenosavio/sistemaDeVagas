@@ -35,141 +35,70 @@
   ],
   "vagas": [
     {
-      "titulo": "Vaga 1",
-      "remuneracao": "R$5000",
-      "descricao": "Dev Jr",
-      "id": 1
-    },
-    {
-      "titulo": "Vaga 2",
-      "remuneracao": "R$4000",
-      "descricao": "Dev PL",
+      "titulo": "Adasd",
+      "remuneracao": "R$ 8.000,00",
+      "descricao": "asdasd",
       "id": 2
     },
     {
-      "titulo": "",
-      "remuneracao": "R$3232",
-      "descricao": "",
+      "titulo": "Vaga 1",
+      "remuneracao": "R$ 8.000,00",
+      "descricao": "Dev Jr",
       "id": 3
     },
     {
-      "titulo": "Aaaaa",
-      "remuneracao": "R$3000",
-      "descricao": "aaaa",
+      "titulo": "Sexcta",
+      "remuneracao": "R$ 4.000,00",
+      "descricao": "xxxxxxxxxx",
       "id": 4
     },
     {
-      "titulo": "Qweqweqwe",
-      "remuneracao": "R$5000",
-      "descricao": "asdasdads",
+      "titulo": "Asdasd",
+      "remuneracao": "R$ 5.000,00",
+      "descricao": "asdasd",
       "id": 5
     },
     {
-      "titulo": "Vaga 3",
-      "remuneracao": "R$2000",
-      "descricao": "Software d",
+      "titulo": "8888888",
+      "remuneracao": "R$ 8.000,00",
+      "descricao": "asdasdasda",
       "id": 6
     },
     {
-      "titulo": "A",
-      "descricao": "a",
+      "titulo": "Teste1",
+      "remuneracao": "R$ 4.000,00",
+      "descricao": "teste1",
       "id": 7
     },
     {
-      "titulo": "Asd",
-      "remuneracao": "R$111111",
-      "descricao": "111",
+      "titulo": "Teste 2",
+      "remuneracao": "R$ 4.800,00",
+      "descricao": "teste2",
       "id": 8
     },
     {
-      "titulo": "Abc",
-      "remuneracao": "R$5400",
-      "descricao": "abc",
+      "titulo": "Testeeeeee",
+      "remuneracao": "R$ 8.000,00",
+      "descricao": "teste",
       "id": 9
     },
     {
-      "titulo": "Aaaa",
-      "remuneracao": "R$5000",
-      "descricao": "aaaa",
+      "titulo": "Savio",
+      "remuneracao": "R$ 7.000,00",
+      "descricao": "savio",
       "id": 10
     },
     {
-      "titulo": "Aaaa",
-      "remuneracao": "R$2500",
-      "descricao": "aaaa",
+      "titulo": "Rafaek",
+      "remuneracao": "R$ 7.000,00",
+      "descricao": "rafael",
       "id": 11
     },
     {
-      "titulo": "Asasdasd",
-      "remuneracao": "R$60000000",
-      "descricao": "asdasd",
-      "id": 12
-    },
-    {
-      "titulo": "Asd",
-      "remuneracao": "R$2000",
-      "descricao": "asd",
-      "id": 13
-    },
-    {
-      "titulo": "Abc",
-      "remuneracao": "R$2000",
-      "descricao": "abc",
-      "id": 14
-    },
-    {
-      "titulo": "Asdasd",
-      "remuneracao": "R$5000",
-      "descricao": "asdasdas",
-      "id": 15
-    },
-    {
-      "titulo": "Aaaaaaa",
-      "remuneracao": "R$2000",
-      "descricao": "aaaaa",
-      "id": 16
-    },
-    {
-      "titulo": "Asdasd",
-      "remuneracao": "R$5000",
-      "descricao": "adsasd",
-      "id": 17
-    },
-    {
-      "titulo": "Asdasd",
-      "remuneracao": "5000",
-      "descricao": "asdasd",
-      "id": 18
-    },
-    {
-      "titulo": "Asdasd",
-      "remuneracao": "2000",
-      "descricao": "asdasd",
-      "id": 19
-    },
-    {
-      "titulo": "Abc",
-      "remuneracao": "2000",
-      "descricao": "bbb",
-      "id": 20
-    },
-    {
-      "titulo": "Asdasd",
-      "remuneracao": "5000",
-      "descricao": "asdasd",
-      "id": 21
-    },
-    {
-      "titulo": "Asdasdasd",
+      "titulo": "Antonio",
       "remuneracao": "R$ 5.000,00",
-      "descricao": "asdasdd",
-      "id": 22
-    },
-    {
-      "titulo": "Asdasd",
-      "remuneracao": "R$ 2.000,00",
-      "descricao": "asdasd",
-      "id": 23
+      "descricao": "antonio",
+      "id": 12
     }
   ]
 }

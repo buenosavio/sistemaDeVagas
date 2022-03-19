@@ -1,6 +1,7 @@
 
 const URL = 'http://localhost:3000';
 let ERRO_VAZIO = document.getElementById('erro-vazio');
+const CLASSES_LI = ['w-100', 'h-100', 'border' ,'rounded' ,'border-dark', 'd-flex' ,'justify-content-between' ,'align-items-center', 'p-2' ,'text-center']
 
 
 //#region validacoes/* Validações do cadastro */ //
@@ -173,6 +174,7 @@ const validarLogin = () => {
     let erro = 'Usuário não encontrado';
     console.log(erro, error);
 })
+listarVagas()
 
 }
 
@@ -341,6 +343,7 @@ const cadastrarUsuario =  (event) => {
 }
 
 const cadastrarVaga =  (event) => {
+
   event.preventDefault();
 
   const inputTitulo = document.getElementById('titulo-input');
@@ -366,7 +369,7 @@ const cadastrarVaga =  (event) => {
   .catch(error => {
     console.log("Erro ao cadastrar Vaga!!", error);
   })
-
+  listarVagas()
 }
 
 const forgetPassword = (event) => {
@@ -385,5 +388,38 @@ const forgetPassword = (event) => {
   .catch(error => {
     alert("Email não encontrado!!", error);
   })
-  
 }
+
+const listarVagas = () => {
+  let ulVaga = document.getElementById('vagas-list')
+  ulVaga.textContent=''
+  axios.get(`${URL}/vagas`).then(response => {
+    response.data.forEach(e => {
+      let liVaga = document.createElement('li')
+      liVaga.setAttribute('id',e.id)
+      liVaga.classList.add('w-100', 'h-10', 'border' ,'rounded' ,'border-dark', 'd-flex' ,'justify-content-between' ,'align-items-center', 'p-2' ,'text-center','mb-2')
+      let pTitulo = document.createElement('p')
+      let spanTitulo = document.createElement('span')
+      let spanRemunera = document.createElement('span')
+      let pSalario = document.createElement('p')
+      ulVaga.appendChild(liVaga)
+      liVaga.append(pTitulo,pSalario)
+      pTitulo.textContent=`Título: `
+      pTitulo.append(spanTitulo)
+      spanTitulo.textContent=e.titulo
+      pTitulo.setAttribute('class','class-list')
+      spanTitulo.setAttribute('class','span')
+
+      pSalario.textContent=`Remuneração: `
+      pSalario.append(spanRemunera)
+      spanRemunera.textContent=e.remuneracao
+      spanRemunera.setAttribute('class','span')
+      pSalario.setAttribute('class','class-list')
+    })
+  }
+  ).catch(erro => {
+    console.log('Erro ao buscar vagas!  ', erro)
+  })
+
+}
+

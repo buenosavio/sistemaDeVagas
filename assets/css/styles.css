@@ -1,0 +1,13 @@
+.class-list {
+    font-weight: bolder!important;
+}
+
+.span {
+    font-weight: normal!important;
+}
+
+li:hover {
+    cursor: pointer;
+    background-color: #cccccc;
+
+}
