@@ -200,7 +200,6 @@ adicionarMascaraRemuneratoria = () => {
   let valor = document.getElementById('payment-input-registration').value
   
     let listaCaracteres = [...valor];
-    
     let listaFiltrada = listaCaracteres.filter(c => !isNaN(parseInt(c)));
     if(listaFiltrada && listaFiltrada.length) {
         let dataDigitada = listaFiltrada.join('');
@@ -210,11 +209,12 @@ adicionarMascaraRemuneratoria = () => {
   
         switch(length) { 
             default:
-              input.value = `R$${dataDigitada}`; 
+              input.value = `R$${dataDigitada}`;              
             break;
         }
+        
+        
     }
-
 }
 
 validarCadastroDeVagas = (event) => {
@@ -350,11 +350,14 @@ const cadastrarVaga =  (event) => {
   const { value: descricao } = inputDescricao;
   
   const inputRemuneracao = document.getElementById('payment-input-registration');
-  const { value: remuneracao } = inputRemuneracao;
-
+  let { value: remuneracao } = inputRemuneracao;
+  let valorConvertido = remuneracao.replaceAll('R$','')
+  valorConvertido = parseInt(valorConvertido)
+  valorConvertido = valorConvertido.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'})
+  
   const tituloCapital = titulo.split(' ').map( titulo => titulo.charAt(0).toUpperCase() + titulo.slice(1).toLowerCase() ).join(' ');
 
-  const vaga = new Vaga(tituloCapital, descricao, remuneracao)
+  const vaga = new Vaga(tituloCapital, descricao, valorConvertido)
 
   axios.post(`${URL}/vagas`, vaga)
   .then(success => {
