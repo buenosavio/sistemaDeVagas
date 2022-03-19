@@ -2,7 +2,7 @@
     font-weight: bolder!important;
 }
 
-.span {
+span {
     font-weight: normal!important;
 }
 
@@ -10,4 +10,8 @@ li:hover {
     cursor: pointer;
     background-color: #cccccc;
 
+}
+
+ul {
+    padding: 0px!important;
 }

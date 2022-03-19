@@ -1,104 +1,56 @@
 {
   "usuarios": [
     {
-      "tipo": "recrutador",
-      "nome": "Rafae",
+      "tipo": "colaborador",
+      "nome": "Colaborador A",
       "dataNascimento": "28/01/2002",
-      "email": "rafael@dbccompany.com",
+      "email": "colaboradorA@dbc.com",
       "senha": "123Aa!@dasd",
+      "candidaturas": [
+        "2"
+      ],
       "id": 1
     },
     {
-      "tipo": "colaborador",
-      "nome": "Savio",
-      "dataNascimento": "02/02/2000",
-      "email": "rafael@dbccompanyy.com",
-      "senha": "56789",
-      "id": 2
-    },
-    {
-      "tipo": "colaborador",
-      "nome": "Rafae",
+      "tipo": "recrutador",
+      "nome": "Recrutador A",
       "dataNascimento": "28/01/2002",
-      "email": "rafael@ompany.com",
+      "email": "recrutadorA@dbc.com",
       "senha": "123Aa!@dasd",
-      "id": 3
-    },
-    {
-      "tipo": "colaborador",
-      "nome": "a",
-      "dataNascimento": "28/01/2002",
-      "email": "a",
-      "senha": "a",
-      "id": 4
+      "candidaturas": [],
+      "id": 2
     }
   ],
   "vagas": [
     {
-      "titulo": "Adasd",
-      "remuneracao": "R$ 8.000,00",
-      "descricao": "asdasd",
+      "titulo": "Analista Senior",
+      "remuneracao": "R$ 120.000,00",
+      "candidatos": [],
+      "descricao": "MUITO DINHEIRO",
+      "id": 1
+    },
+    {
+      "titulo": "Analista",
+      "remuneracao": "R$ 120.000,00",
+      "candidatos": [
+        1
+      ],
+      "descricao": "fsdfdsfsdfsd",
       "id": 2
+    }
+  ],
+  "candidaturas": [
+    {
+      "idVaga": "2",
+      "idCandidato": 1,
+      "reprovado": true,
+      "id": 1
     },
     {
-      "titulo": "Vaga 1",
-      "remuneracao": "R$ 8.000,00",
-      "descricao": "Dev Jr",
-      "id": 3
-    },
-    {
-      "titulo": "Sexcta",
-      "remuneracao": "R$ 4.000,00",
-      "descricao": "xxxxxxxxxx",
-      "id": 4
-    },
-    {
-      "titulo": "Asdasd",
-      "remuneracao": "R$ 5.000,00",
-      "descricao": "asdasd",
-      "id": 5
-    },
-    {
-      "titulo": "8888888",
-      "remuneracao": "R$ 8.000,00",
-      "descricao": "asdasdasda",
-      "id": 6
-    },
-    {
-      "titulo": "Teste1",
-      "remuneracao": "R$ 4.000,00",
-      "descricao": "teste1",
-      "id": 7
-    },
-    {
-      "titulo": "Teste 2",
-      "remuneracao": "R$ 4.800,00",
-      "descricao": "teste2",
-      "id": 8
-    },
-    {
-      "titulo": "Testeeeeee",
-      "remuneracao": "R$ 8.000,00",
-      "descricao": "teste",
-      "id": 9
-    },
-    {
-      "titulo": "Savio",
-      "remuneracao": "R$ 7.000,00",
-      "descricao": "savio",
-      "id": 10
-    },
-    {
-      "titulo": "Rafaek",
-      "remuneracao": "R$ 7.000,00",
-      "descricao": "rafael",
-      "id": 11
-    },
-    {
-      "titulo": "Antonio",
-      "remuneracao": "R$ 5.000,00",
-      "descricao": "antonio",
-      "id": 12
+      "idVaga": "2",
+      "idCandidato": 1,
+      "reprovado": true,
+      "id": 2
     }
   ]
 }
