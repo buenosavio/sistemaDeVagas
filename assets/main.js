@@ -397,7 +397,7 @@ const listarVagas = () => {
     response.data.forEach(e => {
       let liVaga = document.createElement('li')
       liVaga.setAttribute('id',e.id)
-      liVaga.classList.add('w-100', 'h-10', 'border' ,'rounded' ,'border-dark', 'd-flex' ,'justify-content-between' ,'align-items-center', 'p-2' ,'text-center','mb-2')
+      liVaga.classList.add('w-100', 'h-10', 'border' ,'rounded' ,'border-dark', 'd-flex' ,'justify-content-between' ,'align-items-center', 'p-2' ,'text-center','mb-2','teste')
       let pTitulo = document.createElement('p')
       let spanTitulo = document.createElement('span')
       let spanRemunera = document.createElement('span')
@@ -409,7 +409,7 @@ const listarVagas = () => {
       spanTitulo.textContent=e.titulo
       pTitulo.setAttribute('class','class-list')
       spanTitulo.setAttribute('class','span')
-
+      
       pSalario.textContent=`Remuneração: `
       pSalario.append(spanRemunera)
       spanRemunera.textContent=e.remuneracao
@@ -422,4 +422,5 @@ const listarVagas = () => {
   })
 
 }
+
 
