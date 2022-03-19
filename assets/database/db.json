@@ -1,56 +1,56 @@
 {
   "usuarios": [
     {
-      "tipo": "recrutador",
-      "nome": "Rafae",
+      "tipo": "colaborador",
+      "nome": "Colaborador A",
       "dataNascimento": "28/01/2002",
-      "email": "rafael@dbccompany.com",
+      "email": "colaboradorA@dbc.com",
       "senha": "123Aa!@dasd",
+      "candidaturas": [
+        "2"
+      ],
       "id": 1
     },
     {
-      "tipo": "colaborador",
-      "nome": "Savio",
-      "dataNascimento": "02/02/2000",
-      "email": "rafael@dbccompanyy.com",
-      "senha": "56789",
-      "id": 2
-    },
-    {
-      "tipo": "colaborador",
-      "nome": "Rafae",
+      "tipo": "recrutador",
+      "nome": "Recrutador A",
       "dataNascimento": "28/01/2002",
-      "email": "rafael@ompany.com",
+      "email": "recrutadorA@dbc.com",
       "senha": "123Aa!@dasd",
-      "id": 3
-    },
-    {
-      "tipo": "colaborador",
-      "nome": "a",
-      "dataNascimento": "28/01/2002",
-      "email": "a",
-      "senha": "a",
-      "id": 4
+      "candidaturas": [],
+      "id": 2
     }
   ],
   "vagas": [
     {
-      "titulo": "Dev Jr",
-      "remuneracao": "R$ 5.000,00",
-      "descricao": "Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source.",
+      "titulo": "Analista Senior",
+      "remuneracao": "R$ 120.000,00",
+      "candidatos": [],
+      "descricao": "MUITO DINHEIRO",
       "id": 1
     },
     {
-      "titulo": "Dev Sr",
-      "remuneracao": "R$ 15.000,00",
-      "descricao": "Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source.",
+      "titulo": "Analista",
+      "remuneracao": "R$ 120.000,00",
+      "candidatos": [
+        1
+      ],
+      "descricao": "fsdfdsfsdfsd",
       "id": 2
+    }
+  ],
+  "candidaturas": [
+    {
+      "idVaga": "2",
+      "idCandidato": 1,
+      "reprovado": true,
+      "id": 1
     },
     {
-      "titulo": "Support",
-      "remuneracao": "R$ 4.000,00",
-      "descricao": "Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source.",
-      "id": 3
+      "idVaga": "2",
+      "idCandidato": 1,
+      "reprovado": true,
+      "id": 2
     }
   ]
 }

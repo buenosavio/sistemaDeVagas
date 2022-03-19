@@ -149,25 +149,68 @@ const validarCadastro = (event) => {
   }
 }
 
+let usuarioLogado;
+
+
 const validarLogin = () => {
-  const emailDigitado = 'rafael@ompany.com'//document.getElementById('email-input-login').value;
-  const senhaDigitada = '123Aa!@dasd'//document.getElementById('password-input-login').value;
+  const emailDigitado = document.getElementById('email-input-login').value;
+  const senhaDigitada = document.getElementById('password-input-login').value;
 
   
   axios.get(`${URL}/usuarios?=email${emailDigitado}`)
   .then( (sucesso) => {
-    let colabs = sucesso.data[0]
+    let colabs = sucesso.data[0];
+    // console.log(colabs);
+    // console.log(sucesso.data.tipo);
+  
+    let cadastrar = document.getElementById('cadastro-vaga')
+    let buttons = document.getElementById('buttons');
+    let btnRecrutador = document.getElementById('btn-excluir-vaga')
+    let btnColab = document.getElementById('btn-candidatar-vaga')
 
+    let validatePass = colabs.senha === senhaDigitada;
+    const loginOk = sucesso.data.find(e => e.email === emailDigitado);
+    // console.log(`ENTRA AQUI PFVRR`, loginOk.id);
+    const isColab = sucesso.data.find(e => e.tipo === 'colaborador' && e.email === emailDigitado);
 
-    let validatePass = colabs.senha === senhaDigitada
-    const loginOk = sucesso.data.find(e => e.email === emailDigitado)
+    console.log(isColab);
 
-    if(validatePass) {
+    if(validatePass && loginOk) {
       irPara('login', 'home');
     } else if(!loginOk) {
       alert('Email incorreto!')
     } else {
       alert('Senha incorreta!')
+    }
+    // btn btn-dark d-flex
+    if(isColab) {
+      usuarioLogado = loginOk.id;
+      cadastrar.classList.remove('d-flex')
+      cadastrar.classList.add('d-none')
+      buttons.classList.remove('justify-content-between')
+      buttons.classList.add('justify-content-center')
+
+      btnColab.classList.remove('d-none')
+      btnColab.classList.add('d-flex')
+      btnColab.classList.add('btn','btn-dark')
+      
+      btnRecrutador.classList.remove('d-flex')
+      btnRecrutador.classList.add('d-none')
+      
+    }  else {
+      cadastrar.classList.remove('d-none')
+      cadastrar.classList.add('d-flex')
+      cadastrar.classList.add('btn', 'btn-dark')
+      buttons.classList.remove('justify-content-center')
+      buttons.classList.add('justify-content-between')
+      
+      btnRecrutador.classList.remove('d-none')
+      btnRecrutador.classList.add('d-flex')
+      btnRecrutador.classList.add('btn','btn-dark')
+      
+      btnColab.classList.remove('d-flex')
+      btnColab.classList.add('d-none')
+
     }
 
 }).catch((error) => {
@@ -329,7 +372,7 @@ const cadastrarUsuario =  (event) => {
 
   const nomeCapital = nome.split(' ').map( nome => nome.charAt(0).toUpperCase() + nome.slice(1).toLowerCase() ).join(' ');
 
-  const usuarios = new Usuario(option,nomeCapital,nasc,email,senha)
+  const usuarios = new Usuario(option,nomeCapital,nasc,email,senha,[])
 
 
   axios.post(`${URL}/usuarios`, usuarios)
@@ -360,7 +403,7 @@ const cadastrarVaga =  (event) => {
   
   const tituloCapital = titulo.split(' ').map( titulo => titulo.charAt(0).toUpperCase() + titulo.slice(1).toLowerCase() ).join(' ');
 
-  const vaga = new Vaga(tituloCapital, descricao, valorConvertido)
+  const vaga = new Vaga(tituloCapital, descricao, valorConvertido,[])
 
   axios.post(`${URL}/vagas`, vaga)
   .then(success => {
@@ -409,12 +452,24 @@ const listarVagas = () => {
       spanTitulo.textContent=e.titulo
       pTitulo.setAttribute('class','class-list')
       spanTitulo.setAttribute('class','span')
-      
-      pSalario.textContent=`Remuneração: `
+      pSalario.textContent = `Remuneração: `
       pSalario.append(spanRemunera)
       spanRemunera.textContent=e.remuneracao
       spanRemunera.setAttribute('class','span')
       pSalario.setAttribute('class','class-list')
+
+      
+      liVaga.addEventListener('click', (e) => {
+        e.preventDefault()
+        let home = document.getElementById('home')
+        let descricaoVaga = document.getElementById('descricao-vaga')
+        home.classList.remove('d-flex')
+        home.classList.add('d-none')
+        descricaoVaga.classList.remove('d-none')
+        descricaoVaga.classList.add('d-flex')
+        detalharVaga(event)
+        console.log('Entrou no click');
+      })
     })
   }
   ).catch(erro => {
@@ -422,5 +477,229 @@ const listarVagas = () => {
   })
 
 }
+let idLi;
+const detalharVaga = (event) => {
+  axios.get(`${URL}/vagas`)
+  .then(response => {
+    idLi = event.target.id;
+    let divInformacao = document.getElementById('informacoes-vaga')
+    divInformacao.textContent = ''
+    response.data.forEach(element => {
+      let idDiv = element.id;
+      console.log(idDiv,idLi);
+      if(idLi == idDiv) {
+        // console.log(event.target.id);
+        let pTitulo = document.createElement('p')
+        let pDescricao = document.createElement('p')
+        let pRemuneracao = document.createElement('p')
+        let spanTitulo = document.createElement('span')
+        let spanDescricao = document.createElement('span')
+        let spanRemuneracao = document.createElement('span')
+        divInformacao.classList.add('border' ,'rounded' ,'border-dark');
+        divInformacao.append(pTitulo,pDescricao,pRemuneracao);
+        let btnReprovar = document.createElement('button');
+        btnReprovar.classList.add('btn', 'btn-danger', 'd-flex');
+        
+        pTitulo.setAttribute('class', 'class-list')
+        pTitulo.textContent = `Titulo: ${idLi}`
+
+        pTitulo.append(spanTitulo);
+        spanTitulo.textContent = `${element.titulo}`
+        
+        pDescricao.setAttribute('class', 'class-list')
+        pDescricao.textContent = `Descrição: `
+        pDescricao.append(spanDescricao);
+        spanDescricao.textContent = `${element.descricao}`
+        
+        pRemuneracao.setAttribute('class','class-list')
+        pRemuneracao.textContent = `Remuneração: `
+        pRemuneracao.append(spanRemuneracao);
+        spanRemuneracao.textContent = `${element.remuneracao}`
+        
+        
+      }
+    })
+    
+  }).catch(error => {
+    console.log('Houve algum erro', error);
+  })
+  
+  axios.get(`${URL}/usuarios`)
+  .then(response => {
+
+    let candidaturas = response.data.candidaturas;
+    idLi = event.target.id;
+    
+    let ulCandidato = document.getElementById('lista-candidatos-vagas')
+    response.data.forEach(element => {
+      // console.log(element.candidaturas);
+      if(element.candidaturas.includes(idLi)) {
+        let btnCancelar = document.getElementById('btn-cancelar-vaga')
+        let btnCadastrar = document.getElementById('btn-candidatar-vaga');
+        btnCadastrar.classList.remove('d-flex')
+        btnCadastrar.classList.add('d-none');
+        btnCancelar.classList.remove('d-none')
+        btnCancelar.classList.add('d-flex')
+      } else {
+        let btnCancelar = document.getElementById('btn-cancelar-vaga')
+        let btnCadastrar = document.getElementById('btn-candidatar-vaga');
+        btnCadastrar.classList.add('d-flex')
+        btnCadastrar.classList.remove('d-none');
+        btnCancelar.classList.add('d-none')
+        btnCancelar.classList.add('btn','btn-danger')
+        btnCancelar.classList.remove('d-flex')
+      }
+
+      let liCandidato = document.createElement('li')
+      liCandidato.classList.add('w-100', 'd-flex', 'justify-content-between', 'p-2', 'text-center', 'border-bottom', 'border-dark')
+
+      let pNomeCand = document.createElement('p')
+      let pNascCand = document.createElement('p')
+
+      let btnReprovar = document.createElement('button')
+      btnReprovar.classList.add('btn', 'btn-danger', 'd-flex')
+
+      liCandidato.append(pNomeCand,pNascCand, btnReprovar)
+
+      pNomeCand.textContent = element.nome
+      pNascCand.textContent = element.dataNascimento 
+    })
+  })
+}
+
+const candidatarVaga = (event) => {
+  event.preventDefault();
+  const candidatura = new Candidatura(idLi,usuarioLogado,true)
+  axios.post(`${URL}/candidaturas`, candidatura)
+  .then(response => {
+    let candidatura = response.data
+    // console.log('Candidatura realizada com sucesso',candidatura);
+      let btnCancelar = document.getElementById('btn-cancelar-vaga')
+      let btnCadastrar = document.getElementById('btn-candidatar-vaga');
+      btnCadastrar.classList.remove('d-flex')
+      btnCadastrar.classList.add('d-none');
+      btnCancelar.classList.remove('d-none')
+      btnCancelar.classList.add('d-flex')
+      btnCancelar.classList.add('btn','btn-danger')
+    
+  })
+  .catch(error => {
+    console.log('Houve um erro ao realizar a candidatura', error);
+  })
+  
+  atualizaCandidatura();
+}
+
+const voltarAHome = () => {
+  let btnCancelar = document.getElementById('btn-cancelar-vaga')
+  let btnCadastrar = document.getElementById('btn-candidatar-vaga');
+  btnCadastrar.classList.add('d-flex')
+  btnCadastrar.classList.remove('d-none');
+  btnCancelar.classList.add('d-none')
+  btnCancelar.classList.remove('d-flex')
+}
+
+const atualizaCandidatura = () => {
+  const buscaUsuario = async () => { 
+    const response = await axios.get(`${URL}/usuarios/${usuarioLogado}`)
+    try {
+      let candidaturaAtualizada;
+      let candidaturas = response.data.candidaturas;
+      candidaturas.push(idLi)
+      console.log(`Informações do usuario`, candidaturas);
+      console.log(response.data.id);
+      candidaturaAtualizada = new Usuario(response.data.tipo,response.data.nome,response.data.dataNascimento,response.data.email,response.data.senha,candidaturas)
+      console.log(`Entrou no ATUALIZADO:`,candidaturaAtualizada);
+      axios.put(`${URL}/usuarios/${usuarioLogado}`,candidaturaAtualizada)
+      .then(response => {
+                // console.log(candidaturaAtualizada);
+        // console.log('Candidatura atualizada', response);
+      })
+      .catch(error => {
+        console.log('Ocorreu um erro ao atualizar a candidatura', error);
+      })
+    }
+    catch(error) {
+      console.log('Usuário não encontrado', error);
+    }
+  }
+
+  const atualizaVagasCandidatos = async () => {
+    const response = await axios.get(`${URL}/vagas/${idLi}`);
+    try {
+      let candidatos = response.data.candidatos;
+      console.log('Usuário inserido na vaga', candidatos);
+      candidatos.push(usuarioLogado)
+      let vaga = new Vaga(response.data.titulo,response.data.descricao,response.data.remuneracao,candidatos)
+      console.log(`Vaga atualizada`, vaga);
+      axios.put(`${URL}/vagas/${idLi}`, vaga)
+      .then(response => {
+        console.log('Vaga atualizada', response);
+      })
+      .catch(error => {
+        console.log('Ocorreu um erro ao atualizar a vaga', error);
+      })
+    } catch (error) {
+      console.log('Vaga não atualizada', error);
+    }
+  }
+  buscaUsuario();
+  atualizaVagasCandidatos();
+}
+
+const cancelarCandidatura = () => {
+  const buscaUsuario = async () => { 
+    const response = await axios.get(`${URL}/usuarios/${usuarioLogado}`)
+    try {
+      let candidaturaAtualizada;
+      let candidaturas = response.data.candidaturas;
+      let index = candidaturas.indexOf(idLi)
+      candidaturas.splice(index, 1)
+      console.log(`Informações do usuario`, candidaturas);
+      // console.log(response.data.id);
+      candidaturaAtualizada = new Usuario(response.data.tipo,response.data.nome,response.data.dataNascimento,response.data.email,response.data.senha,candidaturas)
+      console.log(`Entrou no ATUALIZADO:`,candidaturaAtualizada);
+      axios.put(`${URL}/usuarios/${usuarioLogado}`,candidaturaAtualizada)
+      .then(response => {
+        let btnCancelar = document.getElementById('btn-cancelar-vaga')
+        let btnCadastrar = document.getElementById('btn-candidatar-vaga');
+        btnCadastrar.classList.add('d-flex')
+        btnCadastrar.classList.remove('d-none');
+        btnCancelar.classList.add('d-none')
+        btnCancelar.classList.remove('d-flex')
+        console.log('Candidatura atualizada', response);
+      })
+      .catch(error => {
+        console.log('Ocorreu um erro ao atualizar a candidatura', error);
+      })
+
+    }
+    catch(error) {
+      console.log('Usuário não encontrado', error);
+    }
+  }
+
+  const removeCandidaturaVagas = async () => {
+      const response = await axios.get(`${URL}/vagas/${idLi}`);
+      try {
+        let candidatos = response.data.candidatos;
+        let index = candidatos.indexOf(usuarioLogado)
+        candidatos.splice(index, 1)
+        let vaga = new Vaga(response.data.titulo,response.data.descricao,response.data.remuneracao,candidatos)
+        // console.log(`Vaga atualizada`, vaga);
+        axios.put(`${URL}/vagas/${idLi}`, vaga)
+        .then(response => {
+          console.log('Vaga atualizada', response);
+        })
+        .catch(error => {
+          console.log('Ocorreu um erro ao atualizar a vaga', error);
+        })
+      } catch (error) {
+        console.log('Vaga não atualizada', error);
+      }
+    }
+    buscaUsuario();
+    removeCandidaturaVagas();
+  }
 
 
