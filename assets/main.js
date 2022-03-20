@@ -5,9 +5,7 @@ const CLASSES_LI = ['w-100', 'h-100', 'border' ,'rounded' ,'border-dark', 'd-fle
 let usuarioLogado;
 let tipoColab;
 let idLi;
-let dadosUsuarioLogado = 0;
-
-         
+let dadosUsuarioLogado = 0; 
 
 
 //#region validacoes/* Validações do cadastro */ //
@@ -523,7 +521,7 @@ const detalharVaga = (event) => {
         divInformacao.append(pTitulo,pDescricao,pRemuneracao);
         
         pTitulo.setAttribute('class', 'class-list')
-        pTitulo.textContent = `Titulo: ${idLi}`
+        pTitulo.textContent = `Titulo: `
 
         pTitulo.append(spanTitulo);
         spanTitulo.textContent = `${element.titulo}`
@@ -739,10 +737,6 @@ const cancelarCandidatura = () => {
 //lista de candidatos - tela de detalhes
 
 const listaCandidaturas = () => {
-    
-}
-
-const listaCandidaturas = () => {
   let ulPai = document.getElementById('lista-candidatos-vagas');
   ulPai.textContent = ""
   axios.get(`${URL}/usuarios`)
@@ -763,6 +757,7 @@ const listaCandidaturas = () => {
         btnRep.textContent = 'Reprovar'
         pNome.textContent = `${element.nome}`
         pData.textContent = `${element.dataNascimento}`
+        pNome.setAttribute('id', `btn-reprovar-${element.id}`);
                
         btnRep.addEventListener('click', (e) => {
           let idColab = e.target.id
@@ -770,6 +765,7 @@ const listaCandidaturas = () => {
           btnRep.classList.remove('btn-danger');
           btnRep.classList.add('btn-secondary');
           btnRep.setAttribute('disabled',true);
+          pNome.classList.add('text-danger');
           console.log(idColab);
             axios.get(`${URL}/candidaturas`).then(
               response => {
@@ -785,6 +781,27 @@ const listaCandidaturas = () => {
             .catch(error => {
               console.log('Houve um erro ao atualizar', error);
             })
+          })
+        axios.get(`${URL}/candidaturas`).then 
+        (response => {
+            let idColab1 = document.getElementById(`btn-reprovar-${element.id}`);
+            idColab1 = idColab1.id
+            idColab1 = idColab1.replaceAll('btn-reprovar-','')
+
+            console.log('idcolab: ', idColab1)
+
+            let reprovados = response.data.filter(e => e.reprovado === false && e.idVaga ===idLi)
+            let iddavaguinha = reprovados.forEach( e => 
+              {if (e.idVaga == idLi && e.idCandidato == idColab1) {
+                btnRep.setAttribute('disabled',true);
+                pNome.classList.add('text-danger');
+                  console.log('idVaga: ',e.idVaga)
+                  console.log('idLi: ',idLi)
+                } })
+                console.log('iddavaguinha: ', iddavaguinha);
+                
+          }).catch(error=> {
+            console.log('erro no get em candidaturas ', error)
           })
         
         if(tipoColab.tipo === 'colaborador') {
@@ -829,7 +846,7 @@ const listaCandidaturas = () => {
          })
          axios.get(`${URL}/candidaturas`)
          .then(response => {
-           let candidatura = response.data;
+           
            let find = response.data.filter(e => e.idVaga === idLi && e.idCandidato  == id)
            find.forEach(e => {
              axios.delete(`${URL}/candidaturas/${e.id}`)

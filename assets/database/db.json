@@ -11,21 +11,18 @@
     },
     {
       "tipo": "colaborador",
-      "nome": "Colaboradorum",
-      "dataNascimento": "28/01/2002",
-      "email": "colA@dbc.com",
+      "nome": "Savio Bueno",
+      "dataNascimento": "01/01/0001",
+      "email": "savio@dbc.com",
       "senha": "123Aa!@dasd",
-      "candidaturas": [
-        "2",
-        "1"
-      ],
+      "candidaturas": [],
       "id": 2
     },
     {
       "tipo": "colaborador",
-      "nome": "Colaboradorum",
-      "dataNascimento": "28/01/2002",
-      "email": "colB@dbc.com",
+      "nome": "Rafael",
+      "dataNascimento": "01/01/0001",
+      "email": "rafael@dbc.com",
       "senha": "123Aa!@dasd",
       "candidaturas": [],
       "id": 3
@@ -33,36 +30,12 @@
   ],
   "vagas": [
     {
-      "titulo": "Dev",
-      "remuneracao": "R$ 12.333,00",
-      "candidatos": [
-        2
-      ],
-      "descricao": "dev",
-      "id": 1
-    },
-    {
-      "titulo": "Dev",
-      "remuneracao": "R$ 12.333,00",
-      "candidatos": [
-        2
-      ],
-      "descricao": "dev",
+      "titulo": "Dev Sr",
+      "remuneracao": "R$ 16.000,00",
+      "candidatos": [],
+      "descricao": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste quam optio autem beatae nemo eligendi fugiat quod mollitia dolores sit.",
       "id": 2
     }
   ],
-  "candidaturas": [
-    {
-      "idVaga": "2",
-      "idCandidato": 2,
-      "reprovado": true,
-      "id": 1
-    },
-    {
-      "idVaga": "1",
-      "idCandidato": 2,
-      "reprovado": false,
-      "id": 2
-    }
-  ]
+  "candidaturas": []
 }
