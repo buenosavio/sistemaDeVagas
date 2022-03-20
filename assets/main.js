@@ -2,7 +2,10 @@
 const URL = 'http://localhost:3000';
 let ERRO_VAZIO = document.getElementById('erro-vazio');
 const CLASSES_LI = ['w-100', 'h-100', 'border' ,'rounded' ,'border-dark', 'd-flex' ,'justify-content-between' ,'align-items-center', 'p-2' ,'text-center']
-
+let usuarioLogado;
+let tipoColab;
+let idLi;
+let dadosUsuarioLogado=0;
 
 //#region validacoes/* Validações do cadastro */ //
 
@@ -149,9 +152,6 @@ const validarCadastro = (event) => {
   }
 }
 
-let usuarioLogado;
-
-
 const validarLogin = () => {
   const emailDigitado = document.getElementById('email-input-login').value;
   const senhaDigitada = document.getElementById('password-input-login').value;
@@ -160,20 +160,11 @@ const validarLogin = () => {
   axios.get(`${URL}/usuarios?=email${emailDigitado}`)
   .then( (sucesso) => {
     let colabs = sucesso.data[0];
-    // console.log(colabs);
-    // console.log(sucesso.data.tipo);
-  
-    let cadastrar = document.getElementById('cadastro-vaga')
-    let buttons = document.getElementById('buttons');
-    let btnRecrutador = document.getElementById('btn-excluir-vaga')
-    let btnColab = document.getElementById('btn-candidatar-vaga')
-
     let validatePass = colabs.senha === senhaDigitada;
     const loginOk = sucesso.data.find(e => e.email === emailDigitado);
-    // console.log(`ENTRA AQUI PFVRR`, loginOk.id);
     const isColab = sucesso.data.find(e => e.tipo === 'colaborador' && e.email === emailDigitado);
-
-    console.log(isColab);
+    tipoColab = sucesso.data.find(e => e.email === emailDigitado);
+    usuarioLogado = loginOk.id;
 
     if(validatePass && loginOk) {
       irPara('login', 'home');
@@ -182,20 +173,36 @@ const validarLogin = () => {
     } else {
       alert('Senha incorreta!')
     }
-    // btn btn-dark d-flex
-    if(isColab) {
-      usuarioLogado = loginOk.id;
+
+        // id="btn-voltar-vaga"  VOLTAR (COLAB E RECRUTADOR)
+        // id="btn-excluir-vaga" EXCLUIR (RECRUTADOR)
+        // id="btn-candidatar-vaga" CANDIDATAR (COLABORADOR)
+        // id="btn-cancelar-vaga" CANCELAR (COLABORADOR)
+    
+        // tela de cadastro de vagas
+    let cadastrar = document.getElementById('cadastro-vaga')
+    let buttons = document.getElementById('buttons');
+
+        //tela de detalhamento da vaga
+    let btnExcluirVaga = document.getElementById('btn-excluir-vaga')
+    let btnCandidatarVaga = document.getElementById('btn-candidatar-vaga')
+    let btnCancelarVaga = document.getElementById('btn-cancelar-vaga')
+    let btnVoltarVaga = document.getElementById('btn-voltar-vaga') //sempre vai existir
+
+    if(tipoColab.tipo==='colaborador') {
+      //variavel para popular as candidaturas conforme id do usuário logado
+      console.log('entrei no if do validar login!!')
+      // tela de cadastro de vagas
       cadastrar.classList.remove('d-flex')
       cadastrar.classList.add('d-none')
       buttons.classList.remove('justify-content-between')
       buttons.classList.add('justify-content-center')
 
-      btnColab.classList.remove('d-none')
-      btnColab.classList.add('d-flex')
-      btnColab.classList.add('btn','btn-dark')
+      btnCandidatarVaga.classList.remove('d-none')
+      btnCandidatarVaga.classList.add('d-flex','btn','btn-dark')
       
-      btnRecrutador.classList.remove('d-flex')
-      btnRecrutador.classList.add('d-none')
+      btnExcluirVaga.classList.remove('d-flex')
+      btnExcluirVaga.classList.add('d-none')
       
     }  else {
       cadastrar.classList.remove('d-none')
@@ -203,14 +210,12 @@ const validarLogin = () => {
       cadastrar.classList.add('btn', 'btn-dark')
       buttons.classList.remove('justify-content-center')
       buttons.classList.add('justify-content-between')
-      
-      btnRecrutador.classList.remove('d-none')
-      btnRecrutador.classList.add('d-flex')
-      btnRecrutador.classList.add('btn','btn-dark')
-      
-      btnColab.classList.remove('d-flex')
-      btnColab.classList.add('d-none')
 
+      btnCandidatarVaga.classList.remove('d-flex')
+      btnCandidatarVaga.classList.add('d-none')      
+      btnExcluirVaga.classList.remove('d-none')
+      btnExcluirVaga.classList.add('d-flex')
+      btnExcluirVaga.classList.add('btn','btn-dark')
     }
 
 }).catch((error) => {
@@ -458,7 +463,6 @@ const listarVagas = () => {
       spanRemunera.setAttribute('class','span')
       pSalario.setAttribute('class','class-list')
 
-      
       liVaga.addEventListener('click', (e) => {
         e.preventDefault()
         let home = document.getElementById('home')
@@ -468,8 +472,36 @@ const listarVagas = () => {
         descricaoVaga.classList.remove('d-none')
         descricaoVaga.classList.add('d-flex')
         detalharVaga(event)
-        console.log('Entrou no click');
-      })
+        if (tipoColab.tipo === 'colaborador') {
+          console.log('entrei no if COLABORADOR')
+          const buscadorUsuario = () => { 
+            axios.get(`${URL}/usuarios/${usuarioLogado}`).then (
+              response => {
+                let candidaturas = response.data.candidaturas
+                if (candidaturas.includes(idLi)) {
+                        let btnCandidatarVaga = document.getElementById('btn-candidatar-vaga')
+                        let btnCancelarVaga = document.getElementById('btn-cancelar-vaga')
+                        btnCandidatarVaga.classList.remove('d-flex')
+                        btnCandidatarVaga.classList.add('d-none');
+                        btnCancelarVaga.classList.remove('d-none')
+                        btnCancelarVaga.classList.add('d-flex')
+                        btnCancelarVaga.classList.add('btn','btn-danger')
+                } else {
+                  console.log('não entrei no if')
+                }
+              }
+            )
+          } 
+          buscadorUsuario()
+        } else {
+          console.log('entrei no else RECRUTADOR')
+          let btnCandidatarVaga = document.getElementById('btn-candidatar-vaga')
+          btnCandidatarVaga.classList.remove('d-flex')
+          btnCandidatarVaga.classList.add('d-none');
+        }
+        
+        
+      }) //aqui termina
     })
   }
   ).catch(erro => {
@@ -477,7 +509,7 @@ const listarVagas = () => {
   })
 
 }
-let idLi;
+
 const detalharVaga = (event) => {
   axios.get(`${URL}/vagas`)
   .then(response => {
@@ -533,14 +565,14 @@ const detalharVaga = (event) => {
     let ulCandidato = document.getElementById('lista-candidatos-vagas')
     response.data.forEach(element => {
       // console.log(element.candidaturas);
-      if(element.candidaturas.includes(idLi)) {
+      if(element.candidaturas.includes(idLi) && tipoColab.tipo==='colaborador') {      
         let btnCancelar = document.getElementById('btn-cancelar-vaga')
         let btnCadastrar = document.getElementById('btn-candidatar-vaga');
         btnCadastrar.classList.remove('d-flex')
         btnCadastrar.classList.add('d-none');
         btnCancelar.classList.remove('d-none')
         btnCancelar.classList.add('d-flex')
-      } else {
+      } else if (tipoColab.tipo==='colaborador') {
         let btnCancelar = document.getElementById('btn-cancelar-vaga')
         let btnCadastrar = document.getElementById('btn-candidatar-vaga');
         btnCadastrar.classList.add('d-flex')
@@ -572,8 +604,6 @@ const candidatarVaga = (event) => {
   const candidatura = new Candidatura(idLi,usuarioLogado,true)
   axios.post(`${URL}/candidaturas`, candidatura)
   .then(response => {
-    let candidatura = response.data
-    // console.log('Candidatura realizada com sucesso',candidatura);
       let btnCancelar = document.getElementById('btn-cancelar-vaga')
       let btnCadastrar = document.getElementById('btn-candidatar-vaga');
       btnCadastrar.classList.remove('d-flex')
@@ -698,8 +728,42 @@ const cancelarCandidatura = () => {
         console.log('Vaga não atualizada', error);
       }
     }
-    buscaUsuario();
-    removeCandidaturaVagas();
+
+  const buscaCandidaturaParaExcluir = () => {
+    axios.get(`${URL}/candidaturas`).then(
+       response => {
+      let idExclusao = response.data.find(e => e.idCandidato == usuarioLogado && e.idVaga == idLi)
+      
+        const deletaCandidatura = () => {
+          axios.delete(`${URL}/candidaturas/${idExclusao.id}`).then (
+            response => {
+              console.log('Candidatura excluída!')
+            }
+          )
+        }
+        deletaCandidatura()
+      }    
+    )
+  
+
+    // "idVaga": "1",
+    // "idCandidato": 1,
+    // "reprovado": true,
+    // "id": 1
   }
+  // const deletaCandidaturas = async () =>  {
+  //   const response = await axios.delete(`${URL}/candidaturas`);
+  //   try{
+  //     event.preventDefault();
+  //   } catch (error) {
+  //     console.log('Houve um erro ao excluir a candidatura', error);
+  //   }
+
+  //   }
+
+  buscaUsuario();
+  removeCandidaturaVagas();
+  buscaCandidaturaParaExcluir();
+}
 
 

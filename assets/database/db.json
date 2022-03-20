@@ -5,10 +5,8 @@
       "nome": "Colaborador A",
       "dataNascimento": "28/01/2002",
       "email": "colaboradorA@dbc.com",
-      "senha": "123Aa!@dasd",
-      "candidaturas": [
-        "2"
-      ],
+      "senha": "1",
+      "candidaturas": [],
       "id": 1
     },
     {
@@ -16,7 +14,7 @@
       "nome": "Recrutador A",
       "dataNascimento": "28/01/2002",
       "email": "recrutadorA@dbc.com",
-      "senha": "123Aa!@dasd",
+      "senha": "1",
       "candidaturas": [],
       "id": 2
     }
@@ -39,18 +37,5 @@
       "id": 2
     }
   ],
-  "candidaturas": [
-    {
-      "idVaga": "2",
-      "idCandidato": 1,
-      "reprovado": true,
-      "id": 1
-    },
-    {
-      "idVaga": "2",
-      "idCandidato": 1,
-      "reprovado": true,
-      "id": 2
-    }
-  ]
+  "candidaturas": []
 }
