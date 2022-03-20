@@ -2,83 +2,32 @@
   "usuarios": [
     {
       "tipo": "colaborador",
-      "nome": "João",
+      "nome": "Colaboradorum",
       "dataNascimento": "28/01/2002",
-      "email": "colaboradorA@dbc.com",
-      "senha": "1",
-      "candidaturas": [
-        "1",
-        "2"
-      ],
+      "email": "colabA@dbc.com",
+      "senha": "123Aa!@dasd",
+      "candidaturas": [],
       "id": 1
     },
     {
       "tipo": "recrutador",
-      "nome": "Recrutador A",
+      "nome": "Recrutadorum",
       "dataNascimento": "28/01/2002",
       "email": "recrutadorA@dbc.com",
-      "senha": "1",
+      "senha": "123Aa!@dasd",
       "candidaturas": [],
       "id": 2
     },
     {
       "tipo": "colaborador",
-      "nome": "Leandro",
+      "nome": "Colaboradordois",
       "dataNascimento": "28/01/2002",
-      "email": "colaboradorB@dbc.com",
-      "senha": "1",
-      "candidaturas": [
-        "2",
-        "1"
-      ],
+      "email": "colabB@dbc.com",
+      "senha": "123Aa!@dasd",
+      "candidaturas": [],
       "id": 3
-    }, 
-    {
-      "tipo": "colaborador",
-      "nome": "José",
-      "dataNascimento": "28/01/2002",
-      "email": "colaboradorC@dbc.com",
-      "senha": "1",
-      "candidaturas": [
-        "1"
-      ],
-      "id": 4
     }
   ],
-  "vagas": [
-    {
-      "titulo": "Analista Senior",
-      "remuneracao": "R$ 120.000,00",
-      "candidatos": [
-        1,
-        3
-      ],
-      "descricao": "MUITO DINHEIRO",
-      "id": 1
-    },
-    {
-      "titulo": "Analista",
-      "remuneracao": "R$ 120.000,00",
-      "candidatos": [
-        1,
-        3
-      ],
-      "descricao": "fsdfdsfsdfsd",
-      "id": 2
-    }
-  ],
-  "candidaturas": [
-    {
-      "idVaga": "2",
-      "idCandidato": 3,
-      "reprovado": false,
-      "id": 3
-    },
-    {
-      "idVaga": "1",
-      "idCandidato": 3,
-      "reprovado": true,
-      "id": 4
-    }
-  ]
+  "vagas": [],
+  "candidaturas": []
 }

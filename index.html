@@ -115,18 +115,13 @@
                     <span>Nome</span><span>Data de Nascimento</span><span> </span>
                 </div>
                 <ul class="w-100 h-100 border border-dark d-flex flex-column justify-content-between align-items-center text-center" id="lista-candidatos-vagas">               
-                    <!-- exemplo li -->
-                    <!-- <li class="w-100 d-flex justify-content-between p-2 text-center border-bottom border-dark">
-                        <p>João</p>
-                        <p>01/01/2002</p>
-                        <button id="btn-reprovar" class="btn btn-danger d-flex" onclick="reprovarVaga(event)">Reprovarr</button>
-                    </li> -->
+                   
                 </ul>
             </div>
 
             <div class="w-50 d-flex justify-content-between">
                 <button type="button"  id="btn-voltar-vaga"  class="btn btn-dark" onclick="irPara('descricao-vaga','home'), voltarAHome()">Voltar</button>
-                <button type="button"  id="btn-excluir-vaga" class="d-none">Excluir Vaga</button>
+                <button type="button"  id="btn-excluir-vaga" class="d-none" onclick="irPara('descricao-vaga','home'), excluirVaga(event)">Excluir Vaga</button>
                 <button type="button"  id="btn-candidatar-vaga" class="d-none" onclick="candidatarVaga(event)">Candidatar-se</button>
                 <button type="button"  id="btn-cancelar-vaga" class="d-none" onclick="cancelarCandidatura()">Cancelar Candidatura</button>
 
@@ -202,7 +197,7 @@
 
             <div class="w-50 d-flex justify-content-between">
                 <button type="button" class="btn btn-dark" onclick="irPara()">Voltar</button>
-                <button type="button"  id="cadastro-vaga" class="btn btn-dark d-flex" onclick="irPara()">Excluir Vaga</button>
+        <button type="button"  id="cadastro-vaga" class="btn btn-dark d-flex" onclick="excluirVaga(event)">Excluir Vagaa</button>
             </div>
                 
         </div>
