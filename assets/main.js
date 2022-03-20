@@ -513,9 +513,11 @@ const listarVagas = () => {
 const detalharVaga = (event) => {
   axios.get(`${URL}/vagas`)
   .then(response => {
+    
     idLi = event.target.id;
     let divInformacao = document.getElementById('informacoes-vaga')
     divInformacao.textContent = ''
+
     response.data.forEach(element => {
       let idDiv = element.id;
       console.log(idDiv,idLi);
