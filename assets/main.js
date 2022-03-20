@@ -5,7 +5,9 @@ const CLASSES_LI = ['w-100', 'h-100', 'border' ,'rounded' ,'border-dark', 'd-fle
 let usuarioLogado;
 let tipoColab;
 let idLi;
-let dadosUsuarioLogado=0;
+let dadosUsuarioLogado = 0;
+let btnRep = document.createElement('button');
+
 
 //#region validacoes/* Validações do cadastro */ //
 
@@ -203,6 +205,7 @@ const validarLogin = () => {
       
       btnExcluirVaga.classList.remove('d-flex')
       btnExcluirVaga.classList.add('d-none')
+
       
     }  else {
       cadastrar.classList.remove('d-none')
@@ -216,6 +219,7 @@ const validarLogin = () => {
       btnExcluirVaga.classList.remove('d-none')
       btnExcluirVaga.classList.add('d-flex')
       btnExcluirVaga.classList.add('btn','btn-dark')
+      // btnRep.classList.add('d-flex')
     }
 
 }).catch((error) => {
@@ -472,6 +476,7 @@ const listarVagas = () => {
         descricaoVaga.classList.remove('d-none')
         descricaoVaga.classList.add('d-flex')
         detalharVaga(event)
+        listaCandidaturas();
         if (tipoColab.tipo === 'colaborador') {
           console.log('entrei no if COLABORADOR')
           const buscadorUsuario = () => { 
@@ -518,7 +523,7 @@ const detalharVaga = (event) => {
     divInformacao.textContent = ''
     response.data.forEach(element => {
       let idDiv = element.id;
-      console.log(idDiv,idLi);
+      // console.log(idDiv,idLi);
       if(idLi == idDiv) {
         // console.log(event.target.id);
         let pTitulo = document.createElement('p')
@@ -529,8 +534,8 @@ const detalharVaga = (event) => {
         let spanRemuneracao = document.createElement('span')
         divInformacao.classList.add('border' ,'rounded' ,'border-dark');
         divInformacao.append(pTitulo,pDescricao,pRemuneracao);
-        let btnReprovar = document.createElement('button');
-        btnReprovar.classList.add('btn', 'btn-danger', 'd-flex');
+        // let btnReprovar = document.createElement('button');
+        // btnRep.classList.add('btn', 'btn-danger', 'd-flex');
         
         pTitulo.setAttribute('class', 'class-list')
         pTitulo.textContent = `Titulo: ${idLi}`
@@ -572,7 +577,9 @@ const detalharVaga = (event) => {
         btnCadastrar.classList.add('d-none');
         btnCancelar.classList.remove('d-none')
         btnCancelar.classList.add('d-flex')
-      } else if (tipoColab.tipo==='colaborador') {
+        btnCancelar.removeAttribute('disabled', true)
+        btnCancelar.removeAttribute('disabled', false)
+      } else if (tipoColab.tipo === 'colaborador') {
         let btnCancelar = document.getElementById('btn-cancelar-vaga')
         let btnCadastrar = document.getElementById('btn-candidatar-vaga');
         btnCadastrar.classList.add('d-flex')
@@ -588,14 +595,25 @@ const detalharVaga = (event) => {
       let pNomeCand = document.createElement('p')
       let pNascCand = document.createElement('p')
 
-      let btnReprovar = document.createElement('button')
-      btnReprovar.classList.add('btn', 'btn-danger', 'd-flex')
+      
+      btnRep.classList.add('btn', 'btn-danger', 'd-flex')
 
-      liCandidato.append(pNomeCand,pNascCand, btnReprovar)
-
+      liCandidato.append(pNomeCand,pNascCand, btnRep)
+      btnRep.textContent = 'Reprovar'
       pNomeCand.textContent = element.nome
       pNascCand.textContent = element.dataNascimento 
     })
+  })
+  axios.get(`${URL}/candidaturas`)
+  .then(response => {
+    let vagaColab = response.data.find(e => e.idCandidato == usuarioLogado && e.reprovado === false && e.idVaga == idLi)
+    console.log('Entrei no get', vagaColab);
+    if(vagaColab) {
+      console.log('ENTRA AQUI PLS');
+      let btnCancelar = document.getElementById('btn-cancelar-vaga');
+      btnCancelar.setAttribute('disabled', true);
+    } 
+
   })
 }
 
@@ -672,9 +690,11 @@ const atualizaCandidatura = () => {
     } catch (error) {
       console.log('Vaga não atualizada', error);
     }
-  }
-  buscaUsuario();
-  atualizaVagasCandidatos();
+  listaCandidaturas();
+  
+}
+buscaUsuario();
+atualizaVagasCandidatos();
 }
 
 const cancelarCandidatura = () => {
@@ -702,7 +722,7 @@ const cancelarCandidatura = () => {
       .catch(error => {
         console.log('Ocorreu um erro ao atualizar a candidatura', error);
       })
-
+      
     }
     catch(error) {
       console.log('Usuário não encontrado', error);
@@ -733,37 +753,88 @@ const cancelarCandidatura = () => {
     axios.get(`${URL}/candidaturas`).then(
        response => {
       let idExclusao = response.data.find(e => e.idCandidato == usuarioLogado && e.idVaga == idLi)
-      
+      console.log(idExclusao);
         const deletaCandidatura = () => {
           axios.delete(`${URL}/candidaturas/${idExclusao.id}`).then (
             response => {
-              console.log('Candidatura excluída!')
+              console.log('Candidatura excluída!', response)
             }
-          )
+          ).catch(error => {
+            console.log('Erro ao excluir candidatura!',error);
+          })
         }
         deletaCandidatura()
+        listaCandidaturas();
+
       }    
-    )
+    ).catch(error => {
+      console.log('Erro ao buscar candidatos!', error);
+    })
   
-
-    // "idVaga": "1",
-    // "idCandidato": 1,
-    // "reprovado": true,
-    // "id": 1
   }
-  // const deletaCandidaturas = async () =>  {
-  //   const response = await axios.delete(`${URL}/candidaturas`);
-  //   try{
-  //     event.preventDefault();
-  //   } catch (error) {
-  //     console.log('Houve um erro ao excluir a candidatura', error);
-  //   }
-
-  //   }
-
+  
   buscaUsuario();
   removeCandidaturaVagas();
   buscaCandidaturaParaExcluir();
 }
 
 
+const listaCandidaturas = () => {
+  console.log('Entrei na lista de candidaturas');
+  let ulPai = document.getElementById('lista-candidatos-vagas');
+  ulPai.textContent = ""
+  axios.get(`${URL}/usuarios`)
+  .then(response => {
+    let idCandidaturas = response.data.filter(e => 
+      e.candidaturas.includes(idLi)
+      )
+      idCandidaturas.forEach(element => {
+        const li = document.createElement('li');
+        const pNome = document.createElement('p');
+        const pData = document.createElement('p');
+        ulPai.appendChild(li)
+        li.append(pNome,pData,btnRep)
+        li.classList.add('w-100','d-flex', 'justify-content-between', 'p-2', 'text-center', 'border-bottom', 'border-dark');
+        btnRep.setAttribute('id', `btn-reprovar-${element.id}`);
+        btnRep.textContent = `Reprovar`
+        pNome.textContent = `${element.nome}`
+        pData.textContent = `${element.dataNascimento}`
+        if(tipoColab.tipo === 'colaborador') {
+          btnRep.classList.add('btn', 'btn-danger', 'd-none')
+          
+        } else {
+          btnRep.classList.remove('d-none')
+          btnRep.classList.add('btn', 'btn-danger','d-flex')
+
+        }
+        // btnRep.addEventListener('onclick', reprovarVaga(event))
+      })
+    console.log('candidatura',idCandidaturas);
+  })
+  .catch(error => {
+    console.log('Houve um erro!', error);
+  })
+} 
+
+
+
+
+btnRep.addEventListener('click', (e) => {
+    let idColab = e.target.id
+    idColab = idColab.replaceAll('btn-reprovar-', '');
+    btnRep.classList.remove('btn-danger')
+    btnRep.classList.add('btn-secondary')
+    console.log(idColab);
+    axios.get(`${URL}/candidaturas`).then(
+      response => {
+        let vagaRep = response.data.find(e => e.idVaga == idLi && idColab == e.idCandidato);
+        console.log(vagaRep);
+        const candidaturas = new Candidatura(vagaRep.idVaga,vagaRep.idCandidato,!vagaRep.reprovado)
+        axios.put(`${URL}/candidaturas/${vagaRep.id}`, candidaturas)
+        .then(response => {
+
+          console.log('Atualizado com sucesso :)', response);
+        })
+      }) 
+  })
+  
