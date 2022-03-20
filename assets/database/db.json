@@ -1,41 +1,68 @@
 {
   "usuarios": [
     {
-      "tipo": "colaborador",
-      "nome": "Colaborador A",
+      "tipo": "recrutador",
+      "nome": "Recrutador",
       "dataNascimento": "28/01/2002",
-      "email": "colaboradorA@dbc.com",
-      "senha": "1",
+      "email": "rec@dbc.com",
+      "senha": "123Aa!@dasd",
       "candidaturas": [],
       "id": 1
     },
     {
-      "tipo": "recrutador",
-      "nome": "Recrutador A",
+      "tipo": "colaborador",
+      "nome": "Colaboradorum",
       "dataNascimento": "28/01/2002",
-      "email": "recrutadorA@dbc.com",
-      "senha": "1",
-      "candidaturas": [],
+      "email": "colA@dbc.com",
+      "senha": "123Aa!@dasd",
+      "candidaturas": [
+        "2",
+        "1"
+      ],
       "id": 2
+    },
+    {
+      "tipo": "colaborador",
+      "nome": "Colaboradorum",
+      "dataNascimento": "28/01/2002",
+      "email": "colB@dbc.com",
+      "senha": "123Aa!@dasd",
+      "candidaturas": [],
+      "id": 3
     }
   ],
   "vagas": [
     {
-      "titulo": "Analista Senior",
-      "remuneracao": "R$ 120.000,00",
-      "candidatos": [],
-      "descricao": "MUITO DINHEIRO",
+      "titulo": "Dev",
+      "remuneracao": "R$ 12.333,00",
+      "candidatos": [
+        2
+      ],
+      "descricao": "dev",
       "id": 1
     },
     {
-      "titulo": "Analista",
-      "remuneracao": "R$ 120.000,00",
+      "titulo": "Dev",
+      "remuneracao": "R$ 12.333,00",
       "candidatos": [
-        1
+        2
       ],
-      "descricao": "fsdfdsfsdfsd",
+      "descricao": "dev",
       "id": 2
     }
   ],
-  "candidaturas": []
+  "candidaturas": [
+    {
+      "idVaga": "2",
+      "idCandidato": 2,
+      "reprovado": true,
+      "id": 1
+    },
+    {
+      "idVaga": "1",
+      "idCandidato": 2,
+      "reprovado": false,
+      "id": 2
+    }
+  ]
 }
