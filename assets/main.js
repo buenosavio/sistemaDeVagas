@@ -744,26 +744,15 @@ const cancelarCandidatura = () => {
         deletaCandidatura()
       }    
     )
-  
-
-    // "idVaga": "1",
-    // "idCandidato": 1,
-    // "reprovado": true,
-    // "id": 1
   }
-  // const deletaCandidaturas = async () =>  {
-  //   const response = await axios.delete(`${URL}/candidaturas`);
-  //   try{
-  //     event.preventDefault();
-  //   } catch (error) {
-  //     console.log('Houve um erro ao excluir a candidatura', error);
-  //   }
-
-  //   }
-
   buscaUsuario();
   removeCandidaturaVagas();
   buscaCandidaturaParaExcluir();
 }
 
+//lista de candidatos - tela de detalhes
+
+const listaCandidaturas = () => {
+    
+}
 
