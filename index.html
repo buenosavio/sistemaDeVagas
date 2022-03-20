@@ -11,12 +11,11 @@
 </head>
 <body style="height: 100vh;">
     <div id="container" class="h-100 flex-column d-flex align-items-center justify-content-center">
-        <form id="login" class="d-flex w-50 pb-3 border border-primary rounded flex-column align-items-center justify-content-center">
-            <div class="bg bg-primary w-100 h-100 text-center p-2 text-white">
+        <form id="login" class="d-flex w-50 pb-3 border border-dark rounded flex-column align-items-center justify-content-center">
+            <div class="bg bg-dark w-100 h-100 text-center p-2 text-white ">
                 <span>Login do Sistema</span>
             </div>
-        
-            <div class="p-3 d-flex flex-column">
+                <div class="p-3 d-flex flex-column">
                 <span>Email</span>
                 <input type="email" id="email-input-login">
             </div>
@@ -36,8 +35,8 @@
             </div>
         </form>
 
-        <div id="registration" class="w-50 pb-3 border border-primary rounded flex-column align-items-center justify-content-center d-none">
-            <div class="bg bg-primary w-100 h-100 text-center p-2 text-white">
+        <div id="registration" class="w-50 pb-3 border border-dark rounded flex-column align-items-center justify-content-center d-none">
+            <div class="bg bg-dark w-100 h-100 text-center p-2 text-white">
                 <span>Cadastro</span>
             </div>
 
@@ -79,8 +78,8 @@
         </div>
 
         <!-- pagina inicial -->
-        <div id="home" class="w-50 pb-3 border border-primary rounded flex-column align-items-center justify-content-center d-none">
-            <div class="bg bg-primary w-100 h-100 text-center p-2 text-white">
+        <div id="home" class="w-50 pb-3 border border-dark rounded flex-column align-items-center justify-content-center d-none b-dark">
+            <div class="bg bg-dark w-100 h-100 text-center p-2 text-white">
                 <span>Vagas</span>
             </div>
             <!-- QUEM QUISER PODE USAR UM BOTÃO PARA PESQUISAR OU PESQUISAR OS USUÁRIOS QUANDO ENTRAR NA HOME -->
@@ -99,8 +98,8 @@
 
         <!-- Tela de detalhamento de vagas -->
 
-        <div id="descricao-vaga" class="w-50 pb-3 border border-primary rounded flex-column align-items-center justify-content-center d-none">
-            <div class="bg bg-primary w-100 h-100 text-center p-2 text-white">
+        <div id="descricao-vaga" class="w-50 pb-3 border border-dark rounded flex-column align-items-center justify-content-center d-none ">
+            <div class="bg bg-dark w-100 h-100 text-center p-2 text-white">
                 <span>Detalhe da Vaga</span>
             </div>
 
@@ -111,7 +110,7 @@
             <h5>Candidatos na Vaga</h5>
 
             <div class="w-100 h-100 d-flex flex-column justify-content-between align-items-center p-2 text-center">
-                <div class="bg bg-primary w-100 h-100 p-2 text-white d-flex justify-content-between align-items-center p-2 text-center">
+                <div class="bg bg-dark w-100 h-100 p-2 text-white d-flex justify-content-between align-items-center p-2 text-center">
                     <span>Nome</span><span>Data de Nascimento</span><span> </span>
                 </div>
                 <ul class="w-100 h-100 border border-dark d-flex flex-column justify-content-between align-items-center text-center" id="lista-candidatos-vagas">               
@@ -129,8 +128,8 @@
                 
         </div>
         <!-- tela de cadastro de vagas -->
-        <div id="registration-vagas" class="w-50 pb-3 border border-primary rounded flex-column align-items-center justify-content-center d-none">
-          <div class="bg bg-primary w-100 h-100 text-center p-2 text-white">
+        <div id="registration-vagas" class="w-50 pb-3 border border-dark rounded flex-column align-items-center justify-content-center d-none">
+          <div class="bg bg-dark w-100 h-100 text-center p-2 text-white">
               <span>Cadastro</span>
           </div>
           
@@ -154,53 +153,10 @@
 
           <div class="w-50 d-flex justify-content-between">
               <button type="button" class="btn btn-dark" onclick="irPara('registration-vagas', 'home'),listarVagas()">Voltar</button>
-              <button type="button" class="btn btn-dark" id="register-btn" onclick="validarCadastroDeVagas(event)">Cadastrar</button>
+              <button type="button" class="btn btn-dark" id="register-btn" onclick="irPara('registration-vagas','home'),validarCadastroDeVagas(event)">Cadastrar</button>
           </div>
       </div>
 
-        <!-- pagina de descricao da vaga  -->
-        <div id="descricao-vaga" class="w-50 pb-3 border border-primary rounded flex-column align-items-center justify-content-center d-none">
-            <div class="bg bg-primary w-100 h-100 text-center p-2 text-white">
-                <span>Detalhe da Vaga</span>
-            </div>
-
-            <div class="w-100 h-100 d-flex flex-column justify-content-between align-items-center p-2 text-center">
-                <textarea class="form-control border-dark d-flex mt-3 " id="descricao-vaga-input" rows="7"></textarea>
-            </div>
-
-            <h5>Candidatos na Vaga</h5>
-
-            <div class="w-100 h-100 d-flex flex-column justify-content-between align-items-center p-2 text-center">
-                <div class="bg bg-primary w-100 h-100 p-2 text-white d-flex justify-content-between align-items-center p-2 text-center">
-                    <span>Nome</span><span>Data de Nascimento</span><span>                   </span>
-                </div>
-                <ul class="w-100 h-100 border border-dark d-flex flex-column justify-content-between align-items-center text-center" id="lista-candidatos-vagas">               
-                    <!-- script pra criar li
-                    
-                    let ulPai = document.getElementById('lista-candidatos-vagas')
-                    let liCandidato = document.createElement('li')
-                    liCandidato.classList.add('w-100', 'd-flex', 'justify-content-between', 'p-2', 'text-center', 'border-bottom', 'border-dark')
-
-                    let pNomeCand = document.createElement('p')
-                    let pNascCand = document.createElement('p')
-
-                    let btnReprovar = document.createElement('button')
-                    btnReprovar.classList.add('btn', 'btn-danger', 'd-flex')
-
-                    liCandidato.append(pNomeCand,pNascCand, btnReprovar)
-
-                    pNomeCand.textContent= //e.nome
-                    pNascCand.textContent= //e.dataNascimaneto -->
-
-                </ul>
-            </div>
-
-            <div class="w-50 d-flex justify-content-between">
-                <button type="button" class="btn btn-dark" onclick="irPara()">Voltar</button>
-        <button type="button"  id="cadastro-vaga" class="btn btn-dark d-flex" onclick="excluirVaga(event)">Excluir Vagaa</button>
-            </div>
-                
-        </div>
 
     </div>
 

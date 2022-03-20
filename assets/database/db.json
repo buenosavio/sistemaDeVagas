@@ -1,33 +1,68 @@
 {
   "usuarios": [
     {
-      "tipo": "colaborador",
-      "nome": "Colaboradorum",
+      "tipo": "recrutador",
+      "nome": "Recrutador",
       "dataNascimento": "28/01/2002",
-      "email": "colabA@dbc.com",
+      "email": "rec@dbc.com",
       "senha": "123Aa!@dasd",
       "candidaturas": [],
       "id": 1
     },
     {
-      "tipo": "recrutador",
-      "nome": "Recrutadorum",
+      "tipo": "colaborador",
+      "nome": "Colaboradorum",
       "dataNascimento": "28/01/2002",
-      "email": "recrutadorA@dbc.com",
+      "email": "colA@dbc.com",
       "senha": "123Aa!@dasd",
-      "candidaturas": [],
+      "candidaturas": [
+        "2",
+        "1"
+      ],
       "id": 2
     },
     {
       "tipo": "colaborador",
-      "nome": "Colaboradordois",
+      "nome": "Colaboradorum",
       "dataNascimento": "28/01/2002",
-      "email": "colabB@dbc.com",
+      "email": "colB@dbc.com",
       "senha": "123Aa!@dasd",
       "candidaturas": [],
       "id": 3
     }
   ],
-  "vagas": [],
-  "candidaturas": []
+  "vagas": [
+    {
+      "titulo": "Dev",
+      "remuneracao": "R$ 12.333,00",
+      "candidatos": [
+        2
+      ],
+      "descricao": "dev",
+      "id": 1
+    },
+    {
+      "titulo": "Dev",
+      "remuneracao": "R$ 12.333,00",
+      "candidatos": [
+        2
+      ],
+      "descricao": "dev",
+      "id": 2
+    }
+  ],
+  "candidaturas": [
+    {
+      "idVaga": "2",
+      "idCandidato": 2,
+      "reprovado": true,
+      "id": 1
+    },
+    {
+      "idVaga": "1",
+      "idCandidato": 2,
+      "reprovado": false,
+      "id": 2
+    }
+  ]
 }
