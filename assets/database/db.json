@@ -1,41 +1,5 @@
 {
-  "usuarios": [
-    {
-      "tipo": "recrutador",
-      "nome": "Recrutador",
-      "dataNascimento": "28/01/2002",
-      "email": "rec@dbc.com",
-      "senha": "123Aa!@dasd",
-      "candidaturas": [],
-      "id": 1
-    },
-    {
-      "tipo": "colaborador",
-      "nome": "Savio Bueno",
-      "dataNascimento": "01/01/0001",
-      "email": "savio@dbc.com",
-      "senha": "123Aa!@dasd",
-      "candidaturas": [],
-      "id": 2
-    },
-    {
-      "tipo": "colaborador",
-      "nome": "Rafael",
-      "dataNascimento": "01/01/0001",
-      "email": "rafael@dbc.com",
-      "senha": "123Aa!@dasd",
-      "candidaturas": [],
-      "id": 3
-    }
-  ],
-  "vagas": [
-    {
-      "titulo": "Dev Sr",
-      "remuneracao": "R$ 16.000,00",
-      "candidatos": [],
-      "descricao": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste quam optio autem beatae nemo eligendi fugiat quod mollitia dolores sit.",
-      "id": 2
-    }
-  ],
-  "candidaturas": []
+  "usuarios": [],
+  "vagas": [ ],
+  "candidaturas":[]
 }

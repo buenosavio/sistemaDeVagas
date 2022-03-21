@@ -27,7 +27,6 @@
         
             <div class="w-50 d-flex justify-content-center">
               <button type="button" class="btn btn-dark" onclick="validarLogin()">Login</button>
-                <!-- <button type="button" onclick="irPara('login', 'registration')">Registre-se</span> -->
             </div>
             <div class="w-50 d-flex justify-content-between">
             <button type="button" class="btn btn-link" onclick="irPara('login', 'registration')">Não possui cadastro?</button>
@@ -40,34 +39,38 @@
                 <span>Cadastro</span>
             </div>
 
-            <div class="p-3 d-flex flex-column">
+            <div class="p-3 d-flex flex-column w-50">
                 <span>Tipo de usuário: </span>
-                <select class="form-select form-select-lg mb-2" aria-label=".form-select-lg example" name="users" id="tipo-usuario">
+                <select class="form-select border-dark d-flex justify-content-start align-items-start" aria-label=".form-select-lg example" name="users" id="tipo-usuario">
                   <option value="colaborador">Colaborador</option>
                   <option value="recrutador">Recrutador</option>
                 </select>
-              </div>
-            <div class="p-3 d-flex flex-column">
+            </div>
+            <div class="p-3 d-flex flex-column w-50 rounded">
                 <span>Nome</span>
-                <input id="nome-input" onkeyup="validarNome()" maxlength="48">
-              </div>
-              <span id="nome-erro" class="d-none text-danger">nome inválido não pode possuir caracteres especiais ou numeros</span>
+                <!-- <input id="nome-input" onkeyup="validarNome()" maxlength="48"> -->
+                <input  id="nome-input" class="form-control border-dark" aria-describedby="emailHelp" placeholder="Informe nome" onkeyup="validarNome()">
+                <span id="nome-erro" class="d-none text-danger">nome inválido não pode possuir caracteres especiais ou numeros</span>
+            </div>
 
-            <div class="p-3 d-flex flex-column">
+            <div class="p-3 d-flex flex-column w-50">
                 <span>Data de Nascimento*</span>
-                <input id="date-input-registration" onkeyup="validarData()" maxlength="10">
+                <!-- <input id="date-input-registration" onkeyup="validarData()" maxlength="10"> -->
+                <input  id="date-input-registration" class="form-control border-dark" aria-describedby="emailHelp" placeholder="Informe data de nascimento" onkeyup="validarData()">
                 <span id="date-registration-error" class="d-none">Data inválida</span>
             </div>
 
-            <div class="p-3 d-flex flex-column">
+            <div class="p-3 d-flex flex-column w-50">
                 <span>Email*</span>
-                <input id="email-input-registration" onkeyup="validarEmail()">
+                <!-- <input id="email-input-registration" onkeyup="validarEmail()"> -->
+                <input  id="email-input-registration" class="form-control border-dark" aria-describedby="emailHelp" placeholder="Informe e-mail" onkeyup="validarEmail()">
                 <span id="email-registration-error" class="d-none">Email inválido</span>
             </div>
 
-            <div class="p-3 d-flex flex-column">
+            <div class="p-3 d-flex flex-column w-50">
                 <span>Senha*</span>
-                <input id="password-input-registration" onkeyup="validarSenha()">
+                <!-- <input id="password-input-registration" onkeyup="validarSenha()"> -->
+                <input  id="password-input-registration" class="form-control border-dark" aria-describedby="emailHelp" placeholder="Informe a senha" onkeyup="validarSenha()">
                 <span id="password-registration-error" class="d-none">Senha inválida</span>
             </div>
 
@@ -84,7 +87,7 @@
             </div>
             <!-- QUEM QUISER PODE USAR UM BOTÃO PARA PESQUISAR OU PESQUISAR OS USUÁRIOS QUANDO ENTRAR NA HOME -->
             <!-- <button class="mt-3" type="button" onclick="listarUsuarios()">Pesquisar usuários</button> -->
-
+            <h4 id="nao-ha-vagas" class="d-none p-2">Sem vagas cadastradas!</h4>
             <ul id="vagas-list" class="w-100 h-100 p-2 align-items-center">
                
             </ul>
@@ -109,7 +112,8 @@
                 </div>
             </div>
 
-            <h5>Candidatos na Vaga</h5>
+            <h5 id="ha-cadastros-detalhe" class="d-none">Candidatos na Vaga</h5>
+            <h5 id="nao-ha-cadastros-detalhe" class="d-none">Não há candidatos na vaga!</h5>
 
             <div class="w-100 h-100 d-flex flex-column justify-content-between align-items-center p-2 text-center">
                 <div class="bg bg-dark w-100 h-100 p-2 text-white d-flex justify-content-between align-items-center p-2 text-center">
@@ -167,5 +171,3 @@
     <script src="assets/main.js"></script>
 </body>
 </html>
-
-Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste quam optio autem beatae nemo eligendi fugiat quod mollitia dolores sit.

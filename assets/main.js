@@ -137,15 +137,14 @@ const adicionarMascaraData = (input, data) => {
 //#endregion validacoes
 
 const validarCadastro = (event) => {
+
   event.preventDefault();
   let cadastroValido = validarData() && validarEmail() && validarSenha() && validarNome();
 
-
   console.log(`Cadastro ${cadastroValido ? 'válido!' : 'inválido'}`);
-
+    
   if(cadastroValido) {
     cadastrarUsuario(event);
-  } else {
     document.getElementById('nome-input').value = '';
     document.getElementById('email-input-registration').value = '';
     document.getElementById('date-input-registration').value = '';
@@ -275,7 +274,7 @@ validarCadastroDeVagas = (event) => {
   } else {
     ERRO_VAZIO.setAttribute('class', cadastroValido ? 'd-none' : 'text-danger');
   } 
-
+  listarVagas()
   return cadastroValido;
 }
 
@@ -410,7 +409,6 @@ const cadastrarVaga =  (event) => {
   .catch(error => {
     console.log("Erro ao cadastrar Vaga!!", error);
   })
-  listarVagas()
 }
 
 const forgetPassword = (event) => {
@@ -432,9 +430,23 @@ const forgetPassword = (event) => {
 }
 
 const listarVagas = () => {
+
   let ulVaga = document.getElementById('vagas-list')
   ulVaga.textContent=''
   axios.get(`${URL}/vagas`).then(response => {
+
+    let naoHaVagas = document.getElementById('nao-ha-vagas')
+    console.log('response.data: ', response.data.length);
+    if (response.data.length === 0) {
+      console.log('entrei no if do nao ha vagas')
+      naoHaVagas.classList.remove('d-none')
+      naoHaVagas.classList.add('d-flex')
+    } else {
+      console.log('entrei no else do nao ha vagas')
+      naoHaVagas.classList.remove('d-flex')
+      naoHaVagas.classList.add('d-none')
+    }
+
     response.data.forEach(e => {
       let liVaga = document.createElement('li')
       liVaga.setAttribute('id',e.id)
@@ -503,7 +515,7 @@ const listarVagas = () => {
 const detalharVaga = (event) => {
   axios.get(`${URL}/vagas`)
   .then(response => {
-    
+  
     idLi = event.target.id;
     let divInformacao = document.getElementById('informacoes-vaga')
     divInformacao.textContent = ''
@@ -547,6 +559,24 @@ const detalharVaga = (event) => {
   axios.get(`${URL}/usuarios`)
   .then(response => {
 
+    let naoHacandidatos = document.getElementById('nao-ha-cadastros-detalhe')
+    let haCandidatos = document.getElementById('ha-cadastros-detalhe')
+   
+    let colaboradoresNaVaga = response.data.filter(e => e.candidaturas.includes(idLi))
+    if(colaboradoresNaVaga.length === 0){
+      console.log('entrei na 1 condição', colaboradoresNaVaga, 'lenght', response.data.length );
+      naoHacandidatos.classList.remove('d-none')
+      naoHacandidatos.classList.add('d-flex')
+      haCandidatos.classList.remove('d-flex')
+      haCandidatos.classList.add('d-none')
+    } else {
+      console.log('entrei na 2 condição', colaboradoresNaVaga, 'lenght', response.data.length );
+      naoHacandidatos.classList.remove('d-flex')
+      naoHacandidatos.classList.add('d-none')
+      haCandidatos.classList.remove('d-none')
+      haCandidatos.classList.add('d-flex')
+    }
+
     idLi = event.target.id;
     response.data.forEach(element => {
       if(element.candidaturas.includes(idLi) && tipoColab.tipo === 'colaborador') {      
@@ -566,7 +596,7 @@ const detalharVaga = (event) => {
         btnCancelar.classList.add('d-none')
         btnCancelar.classList.add('btn','btn-danger')
         btnCancelar.classList.remove('d-flex')
-      }
+      } 
 
     })
   })
